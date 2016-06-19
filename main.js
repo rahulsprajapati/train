@@ -33,23 +33,28 @@
 		init: function(){
 			this.setProps();
 			this.events();
-			this.startTrains();
 		},
 
 		events: function(){
 			this.stage.addEventListener( 'click', this.switchTrack.bind(this), false );
+			this.playButton.addEventListener( 'click', this.play.bind(this), false );
 		},
 
 		setProps: function(){
 			this.stage = doc.getElementById( 'tain-scene' );
+			this.playButton = doc.getElementById( 'play' );
 			this.handle = doc.querySelectorAll( '.handle' );
 			this.honk = new Audio('assets/sound/horn.mp3');
+		},
+
+		play: function(){
+			this.startTrains();
 		},
 
 		startTrains: function(){
 			var _this = this;
 
-			// @todo Have to create trains dynamically like this.
+			// @todo Temp: Have to create trains dynamically like this.
 			_this.startTrain( 'pink', 'pink' );
 
 			setTimeout( function(){
