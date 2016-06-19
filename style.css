@@ -1,0 +1,158 @@
+/*==============================
+          Reset
+===============================*/
+body{
+	padding: 0;
+	margin: 0;
+}
+
+/*==============================
+          Scene
+===============================*/
+
+#tain-scene{
+	background: url( 'assets/scene.png' );
+	width: 642px;
+	height: 480px;
+	position: relative;
+}
+
+button{
+	cursor: pointer;
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+}
+
+/*==============================
+          Handles
+===============================*/
+
+.handle{
+	width: 55px;
+	height: 55px;
+	position: absolute;
+	cursor:pointer;
+	transition: 0.1s;
+}
+
+.handle-1{
+	top: 128px;
+	left: 374px;
+}
+
+.handle-2{
+	top: 56px;
+    left: 217px;
+}
+
+.handle-3{
+    top: 215px;
+    left: 301px;
+}
+
+.handle-4{
+	top: 290px;
+    left: 212px;
+}
+
+.handle-5{
+	top: 295px;
+    left: 366px;
+}
+
+.handle-6{
+	top: 136px;
+	left: 140px;
+}
+
+.handle-down{
+	background: url( 'assets/handles/down.png' );
+}
+
+.handle-straight{
+	background: url( 'assets/handles/straight.png' );
+}
+
+.handle-right-down{
+	background: url( 'assets/handles/right-down.png' );
+}
+
+.handle-left-down{
+	background: url( 'assets/handles/left-down.png' );
+}
+
+.handle-top-left{
+	background: url( 'assets/handles/right-down.png' );
+    transform: rotate(170deg);
+}
+
+/*==============================
+          Train
+===============================*/
+
+.train{
+	width: 40px;
+	height: 20px;
+	position: absolute;
+	background: pink;
+	border-radius: 3px;
+	border:2px solid #ffffff;
+}
+
+.train:before, .train:after{
+	content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    border: 2px solid black;
+    position: absolute;
+    bottom: -7px;
+}
+
+.train span{
+	width: 10px;
+	height: 10px;
+	position: absolute;
+	top: -8px;
+	left: 5px;
+	background: black;
+	display: inline-block;
+	border-radius: 5px 5px 0 0;
+}
+
+.train:before{
+    left: 5px;
+}
+
+.train:after{
+    right: 5px;
+}
+
+.train-pink{
+	background: pink;
+    left: 500px;
+    top: 61px;
+}
+
+.train-yellow{
+	background: yellow;
+    left: 500px;
+    top: 61px;
+}
+
+.train-green{
+	background: green;
+    left: 500px;
+    top: 61px;
+}
+
+.train-violet{
+	background: violet;
+    left: 500px;
+    top: 61px;
+}
+
+.train-down{
+    transform: rotate( -90deg );
+}
