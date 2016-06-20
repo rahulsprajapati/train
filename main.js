@@ -5,31 +5,6 @@
 
 		speed: 10,
 
-		map: {
-			pink: [
-				{
-					start: { x: 500, y: 61 },
-					end: { x: 378, y: 61 }
-				},
-				{
-					start: { x: 378, y: 61 },
-					end: { x: 378, y: 224 }
-				},
-				{
-					start: { x: 378, y: 224 },
-					end: { x: 215, y: 224 }
-				},
-				{
-					start: { x: 215, y: 224 },
-					end: { x: 215, y: 380 }
-				},
-				{
-					start: { x: 215, y: 380 },
-					end: { x: 215, y: 380 }
-				}
-			],
-		},
-
 		init: function(){
 			this.setProps();
 			this.events();
@@ -44,7 +19,13 @@
 			this.stage = doc.getElementById( 'tain-scene' );
 			this.playButton = doc.getElementById( 'play' );
 			this.handle = doc.querySelectorAll( '.handle' );
-			this.honk = new Audio('assets/sound/horn.mp3');
+			this.handle1 = doc.getElementById( 'handle-1' );
+			this.handle2 = doc.getElementById( 'handle-2' );
+			this.handle3 = doc.getElementById( 'handle-3' );
+			this.handle4 = doc.getElementById( 'handle-4' );
+			this.handle5 = doc.getElementById( 'handle-5' );
+			this.handle6 = doc.getElementById( 'handle-6' );
+			// this.honk = new Audio('assets/sound/horn.mp3');
 		},
 
 		play: function(){
@@ -97,61 +78,123 @@
 
 		startTrain: function( trackColor, trainColor ){
 			var train = this.createTrain( trainColor );
-			var track = this.map[trackColor];
+			// var track = this.map[trackColor];
 
-			this.honk.play();
-			this.moveTrain( train, track );
+			// this.honk.play();
+			this.moveTrain( train );
 
 			return train;
 		},
 
-		moveTrain: function( train, track ){
+		moveTrain: function( train ){
 
 			var loop        = 0,
 				_this       = this,
-				currentTack = track[loop],
-				startPoint  = currentTack.start,
-				endPoint    = currentTack.end,
-				trackLength = track.length,
-				x           = startPoint.x,
-				y           = startPoint.y,
+				x = 500,
+				y = 61,
 				nextLoop, interval, previousTrack;
 
 			interval = setInterval( function(){
 
-				if ( x > endPoint.x ) {
+				if ( train.offsetLeft > 380 && train.offsetTop == 61 ) {
 					train.style.left = --x + 'px';
 				}
 
-				if ( y < endPoint.y ) {
+				if ( train.offsetLeft == 380 && train.offsetTop < 100 ) {
+					console.log("TEst y1");
 					train.style.top = ++y + 'px';
 				}
 
-				// Stop the train.
-				if ( ( loop + 1 )  >= trackLength ) {
-					clearInterval( interval );
+				if ( _this.hasClass( _this.handle1, "handle-down" ) && train.offsetTop >= 100 && train.offsetTop <= 225 && train.offsetLeft == 380) {
+					train.style.top = ++y + 'px';
 				}
-
-				// Point where it has reached it's current destination
-				if ( x === endPoint.x && y === endPoint.y ) {
-					nextLoop = loop + 1;
-					loop = nextLoop;
-					if( track.hasOwnProperty( nextLoop ) ){
-						currentTack = track[nextLoop];
-						previousTrack = track[loop];
-						startPoint = currentTack.start;
-						endPoint = currentTack.end;
-
-						x = startPoint.x;
-						y = startPoint.y;
-
-						if ( previousTrack.end.y !== startPoint.y ) {
-							_this.addClass( train, 'train-down' );
-						} else {
-							_this.removeClass( train, 'train-down' );
-						}
+				if ( _this.hasClass( _this.handle1, "handle-top-left" ) && train.offsetLeft <= 380 ) {
+					if ( train.offsetLeft == 380 && train.offsetTop < 140 ) {
+						train.style.top = ++y + 'px';
+					}
+					if ( train.offsetLeft > 300 && train.offsetTop == 140 ) {
+						train.style.left = --x + 'px';
 					}
 				}
+
+				// for handle-down
+				if ( train.offsetLeft <= 380 && train.offsetLeft > 305 && train.offsetTop == 226 ) {
+					train.style.left = --x + 'px';
+				}
+
+				// for handle1 handle-top-left
+				if ( train.offsetLeft == 300 && train.offsetTop >= 70  && train.offsetTop <= 145 ) {
+					train.style.top = --y + 'px';
+				}
+
+				//for handle1 handle-top-left
+				if ( train.offsetLeft >= 222 && train.offsetLeft <= 300 && train.offsetTop == 70 ) {
+					train.style.left = --x + 'px';
+				}
+
+				if ( _this.hasClass( _this.handle2, "handle-straight" ) && train.offsetTop == 70 && train.offsetLeft <= 222 && train.offsetLeft >= 58 ) {
+					train.style.left = --x + 'px';
+				}
+
+				if ( _this.hasClass( _this.handle2, "handle-right-down" ) && train.offsetTop >= 70 && train.offsetTop <= 145 && train.offsetLeft == 222 ) {
+					train.style.top = ++y + 'px';
+				}
+
+				// for handle2 handle-right-down
+				if ( train.offsetTop == 145 && train.offsetLeft <= 222 && train.offsetLeft >= 150 ) {
+					train.style.left = --x + 'px';
+				}
+
+				if ( _this.hasClass( _this.handle3, "handle-straight" ) && train.offsetTop == 226 && train.offsetLeft <= 305 && train.offsetLeft >= 225 ) {
+					train.style.left = --x + 'px';
+				}
+
+				if ( _this.hasClass( _this.handle3, "handle-right-down" ) && train.offsetTop >= 226 && train.offsetTop <= 305 && train.offsetLeft == 305 ) {
+					train.style.top = ++y + 'px';
+				}
+
+				if ( _this.hasClass( _this.handle4, "handle-down" ) && train.offsetTop >= 226 && train.offsetTop <= 380 && train.offsetLeft == 224 ) {
+					train.style.top = ++y + 'px';
+				}
+
+				if ( _this.hasClass( _this.handle4, "handle-top-left" ) && train.offsetTop >= 226 && train.offsetLeft <= 224 && train.offsetLeft >= 135 ) {
+					if ( train.offsetTop <= 305 ) {
+						train.style.top = ++ y + 'px';
+					}
+					if ( train.offsetTop == 306 ) {
+						train.style.left = --x + 'px';
+					}
+				}
+
+				// for handle4 handle-down
+				if ( train.offsetTop == 306 && train.offsetLeft >= 305 && train.offsetLeft <= 370 ) {
+					train.style.left = ++x + 'px';
+				}
+
+				if ( _this.hasClass( _this.handle5, "handle-straight" ) && train.offsetTop == 306 && train.offsetLeft >= 370 && train.offsetLeft <= 460 ) {
+					train.style.left = ++x + 'px';
+				}
+
+				if ( _this.hasClass( _this.handle5, "handle-left-down" ) && train.offsetLeft == 371 && train.offsetTop >= 306 && train.offsetTop <= 385 ) {
+					train.style.top = ++ y + 'px';
+				}
+
+				//for handle5 handle-left-down
+				if ( train.offsetTop == 385 && train.offsetLeft <= 371 && train.offsetLeft >= 295 ) {
+					train.style.left = -- x + 'px';
+				}
+
+				if ( _this.hasClass( _this.handle6, "handle-straight" ) && train.offsetTop == 145 && train.offsetLeft <= 149 && train.offsetLeft >= 58 ) {
+					train.style.left = -- x + 'px';
+				}
+
+				if ( _this.hasClass( _this.handle6, "handle-right-down" ) && train.offsetLeft == 149 && train.offsetTop >= 145 && train.offsetTop <= 225 ) {
+					train.style.top = ++ y + 'px';
+				}
+
+				// if ( train.offsetTop == 61 && train.offsetLeft <= 300) {
+				// 	clearInterval( interval );
+				// }
 
 			}, this.speed );
 		},
